@@ -74,6 +74,18 @@ const command: GluegunCommand = {
                     },
                 });
 
+                await template.generate({
+                    template: 'repositoryInterface.ts.ejs',
+                    target: `src/modules/${nameCamelCase}/infra/http/typeorm/repositories/${nameCamelCaseUpperFirst}Repository.ts`,
+                    props: {
+                        nameCamelCase,
+                        nameCamelCaseUpperFirst,
+                        properties,
+                        tenantid,
+                        architecture,
+                    },
+                });
+
                 break;
             default:
                 await template.generate({

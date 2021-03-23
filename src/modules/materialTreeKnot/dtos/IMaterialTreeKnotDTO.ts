@@ -8,8 +8,7 @@ export interface MaterialTreeKnotInterface extends RelationalTenantidInterface {
     material_id: string;
 }
 
-export interface MaterialTreeKnotRequestGetAllInterface
-    extends typeorm.RequestGetAllInterface {
+export interface MaterialTreeKnotRequestGetAllInterface extends typeorm.RequestGetAllInterface {
     code?: string;
     level_id?: string;
     category_id?: string;
