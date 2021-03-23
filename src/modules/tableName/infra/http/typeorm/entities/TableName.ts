@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { RelationalTenantidInterface } from '../../../../../../common/dttos/RelationalTenantid';
+import { RelationalTenantidInterface } from '../../../../../../common/dtos/RelationalTenantid';
 
 @Entity('table-name')
 export default class TableName extends RelationalTenantidEntity {

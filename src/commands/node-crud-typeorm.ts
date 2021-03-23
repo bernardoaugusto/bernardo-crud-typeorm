@@ -61,6 +61,19 @@ const command: GluegunCommand = {
                         architecture,
                     },
                 });
+
+                await template.generate({
+                    template: 'interface.ts.ejs',
+                    target: `src/modules/${nameCamelCase}/dtos/I${nameCamelCaseUpperFirst}DTO.ts`,
+                    props: {
+                        tableName,
+                        nameCamelCaseUpperFirst,
+                        properties,
+                        tenantid,
+                        architecture,
+                    },
+                });
+
                 break;
             default:
                 await template.generate({
