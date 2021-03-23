@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-<% if (props.tenantid) { %>import { RelationalTenantidEntity } from './metadata/RelationalTenantidEntity';<% } else{ %>import { RelationalWithoutTenantidEntity } from './metadata/RelationalWithoutTenantidEntity';<% } %>
+
+<% if (props.architecture === 'clean-architecture') { %><% if (props.tenantid) { %>import { RelationalTenantidEntity } from '../../../../../../common/typeorm/entities/RelationalTenantidEntity';<% } else{ %>import { RelationalWithoutTenantidEntity } from '../../../../../../common/typeorm/entities/RelationalWithoutTenantidEntity';<% } %><% } else{ %><% if (props.tenantid) { %>import { RelationalTenantidEntity } from './metadata/RelationalTenantidEntity';<% } else{ %>import { RelationalWithoutTenantidEntity } from './metadata/RelationalWithoutTenantidEntity';<% } %><% } %>
 
 @Entity('<%= props.tableName %>')
 export default class <%= props.nameCamelCaseUpperFirst %> extends <% if (props.tenantid) { %>RelationalTenantidEntity<% } else{ %>RelationalWithoutTenantidEntity<% } %> {
