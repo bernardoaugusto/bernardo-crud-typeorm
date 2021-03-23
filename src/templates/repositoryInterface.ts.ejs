@@ -1,7 +1,7 @@
 import { typeorm } from '@seidor-cloud-produtos/lib-seidor-common';
 
-<% if (props.architecture === 'clean-architecture') { %>import <%= props.nameCamelCaseUpperFirst %> from '../entities/<%= props.nameCamelCaseUpperFirst %>';<% } else{ %>import <%= props.nameCamelCaseUpperFirst %> from '../../database/entities/<%= props.nameCamelCaseUpperFirst %>';<% } %>
-<% if (props.architecture === 'clean-architecture') { %>import { <%= props.nameCamelCaseUpperFirst %>Interface } from '../../../../dtos/I<%= props.nameCamelCaseUpperFirst %>DTO';<% } else{ %>import { <%= props.nameCamelCaseUpperFirst %>Interface } from '../<%= props.nameCamelCase %>';<% } %>
+<% if (props.architecture === 'clean-architecture') { %>import <%= props.nameCamelCaseUpperFirst %> from '../infra/http/typeorm/entities/<%= props.nameCamelCaseUpperFirst %>';<% } else{ %>import <%= props.nameCamelCaseUpperFirst %> from '../../database/entities/<%= props.nameCamelCaseUpperFirst %>';<% } %>
+<% if (props.architecture === 'clean-architecture') { %>import { <%= props.nameCamelCaseUpperFirst %>Interface } from '../dtos/I<%= props.nameCamelCaseUpperFirst %>DTO';<% } else{ %>import { <%= props.nameCamelCaseUpperFirst %>Interface } from '../<%= props.nameCamelCase %>';<% } %>
 export default interface I<%= props.nameCamelCaseUpperFirst %>Repository {
     createAndSave(
         <%= props.nameCamelCase %>Data: <%= props.nameCamelCaseUpperFirst %>Interface,
