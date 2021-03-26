@@ -1,0 +1,21 @@
+import { inject, injectable } from 'tsyringe';
+
+import I<%= props.nameCamelCaseUpperFirst %>RepositoryDTO from '../repositories/I<%= props.nameCamelCaseUpperFirst %>RepositoryDTO';
+import GetById<%= props.nameCamelCaseUpperFirst %>Service from './GetById<%= props.nameCamelCaseUpperFirst %>Service';
+
+@injectable()
+export default class Remove<%= props.nameCamelCaseUpperFirst %>Service {
+    constructor(
+        @inject('<%= props.nameCamelCaseUpperFirst %>Repository')
+        private <%= props.nameCamelCase %>Repository: I<%= props.nameCamelCaseUpperFirst %>RepositoryDTO,
+
+        @inject('GetById<%= props.nameCamelCaseUpperFirst %>Service')
+        private getById<%= props.nameCamelCaseUpperFirst %>Service: GetById<%= props.nameCamelCaseUpperFirst %>Service,
+    ) {}
+
+    public async execute(<%= props.nameCamelCase %>Id: string): Promise<void> {
+        await this.getById<%= props.nameCamelCaseUpperFirst %>Service.execute(<%= props.nameCamelCase %>Id<% if (props.tenantid) { %>, tenantid<% }%>);
+
+        await this.<%= props.nameCamelCase %>Repository.remove(<%= props.nameCamelCase %>Id);
+    }
+}
