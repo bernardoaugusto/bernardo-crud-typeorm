@@ -62,7 +62,6 @@ const command: GluegunCommand = {
             template: 'dtos/DTOinterface.ts.ejs',
             target: `src/modules/${nameCamelCase}/dtos/I${nameCamelCaseUpperFirst}DTO.ts`,
             props: {
-                tableName,
                 nameCamelCaseUpperFirst,
                 properties,
             },
@@ -71,7 +70,6 @@ const command: GluegunCommand = {
             template: 'dtos/DTOcreate.ts.ejs',
             target: `src/modules/${nameCamelCase}/dtos/I${nameCamelCaseUpperFirst}CreateDTO.ts`,
             props: {
-                tableName,
                 nameCamelCaseUpperFirst,
                 properties,
             },
@@ -80,7 +78,6 @@ const command: GluegunCommand = {
             template: 'dtos/DTOupdate.ts.ejs',
             target: `src/modules/${nameCamelCase}/dtos/I${nameCamelCaseUpperFirst}UpdateDTO.ts`,
             props: {
-                tableName,
                 nameCamelCaseUpperFirst,
                 properties,
             },
@@ -89,7 +86,6 @@ const command: GluegunCommand = {
             template: 'dtos/DTOrequestGetAll.ts.ejs',
             target: `src/modules/${nameCamelCase}/dtos/I${nameCamelCaseUpperFirst}RequestGetAllDTO.ts`,
             props: {
-                tableName,
                 nameCamelCaseUpperFirst,
                 properties,
             },
@@ -100,7 +96,6 @@ const command: GluegunCommand = {
             template: 'repositoryDTO.ts.ejs',
             target: `src/modules/${nameCamelCase}/repositories/I${nameCamelCaseUpperFirst}RepositoryDTO.ts`,
             props: {
-                tableName,
                 nameCamelCaseUpperFirst,
                 nameCamelCase,
                 properties,
@@ -112,9 +107,18 @@ const command: GluegunCommand = {
             template: 'repository.ts.ejs',
             target: `src/modules/${nameCamelCase}/infra/http/typeorm/repositories/${nameCamelCaseUpperFirst}Repository.ts`,
             props: {
-                tableName,
                 nameCamelCaseUpperFirst,
                 nameCamelCase,
+                properties,
+            },
+        });
+
+        await template.generate({
+            template: 'services/serviceCreate.ts.ejs',
+            target: `src/modules/${nameCamelCase}/services/Create${nameCamelCaseUpperFirst}Service.ts`,
+            props: {
+                nameCamelCase,
+                nameCamelCaseUpperFirst,
                 properties,
             },
         });
