@@ -46,6 +46,12 @@ const command: GluegunCommand = {
             },
         };
 
+        // DEPENDENCYS
+        await template.generate({
+            template: 'dependencys/appError.ts.ejs',
+            target: `src/shared/errors/AppError.ts`,
+        });
+
         // ENTITY
         await template.generate({
             template: 'entity.ts.ejs',
@@ -113,9 +119,19 @@ const command: GluegunCommand = {
             },
         });
 
+        // Services
         await template.generate({
             template: 'services/serviceCreate.ts.ejs',
             target: `src/modules/${nameCamelCase}/services/Create${nameCamelCaseUpperFirst}Service.ts`,
+            props: {
+                nameCamelCase,
+                nameCamelCaseUpperFirst,
+                properties,
+            },
+        });
+        await template.generate({
+            template: 'services/serviceGetById.ts.ejs',
+            target: `src/modules/${nameCamelCase}/services/GetById${nameCamelCaseUpperFirst}Service.ts`,
             props: {
                 nameCamelCase,
                 nameCamelCaseUpperFirst,

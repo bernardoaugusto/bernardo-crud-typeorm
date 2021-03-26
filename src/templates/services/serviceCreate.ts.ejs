@@ -2,13 +2,13 @@ import { inject, injectable } from 'tsyringe';
 
 import <%= props.nameCamelCaseUpperFirst %> from '../infra/http/typeorm/entities/<%= props.nameCamelCaseUpperFirst %>';
 import I<%= props.nameCamelCaseUpperFirst %>CreateDTO from '../dtos/I<%= props.nameCamelCaseUpperFirst %>CreateDTO';
-import I<%= props.nameCamelCaseUpperFirst %>Repository from '../repositories/I<%= props.nameCamelCaseUpperFirst %>RepositoryDTO';
+import I<%= props.nameCamelCaseUpperFirst %>RepositoryDTO from '../repositories/I<%= props.nameCamelCaseUpperFirst %>RepositoryDTO';
 
 @injectable()
 export default class Create<%= props.nameCamelCaseUpperFirst %>Service {
     constructor(
         @inject('<%= props.nameCamelCaseUpperFirst %>Repository')
-        private <%= props.nameCamelCase %>Repository: I<%= props.nameCamelCaseUpperFirst %>Repository,
+        private <%= props.nameCamelCase %>Repository: I<%= props.nameCamelCaseUpperFirst %>RepositoryDTO,
     ) {}
 
     public async execute(<%= props.nameCamelCase %>Data: I<%= props.nameCamelCaseUpperFirst %>CreateDTO): Promise<<%= props.nameCamelCaseUpperFirst %>> {
