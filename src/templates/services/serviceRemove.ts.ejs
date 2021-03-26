@@ -14,7 +14,7 @@ export default class Remove<%= props.nameCamelCaseUpperFirst %>Service {
     ) {}
 
     public async execute(<%= props.nameCamelCase %>Id: string): Promise<void> {
-        await this.getById<%= props.nameCamelCaseUpperFirst %>Service.execute(<%= props.nameCamelCase %>Id<% if (props.tenantid) { %>, tenantid<% }%>);
+        await this.getById<%= props.nameCamelCaseUpperFirst %>Service.execute(<%= props.nameCamelCase %>Id);
 
         await this.<%= props.nameCamelCase %>Repository.remove(<%= props.nameCamelCase %>Id);
     }

@@ -166,6 +166,17 @@ const command: GluegunCommand = {
             },
         });
 
+        // Controller
+        await template.generate({
+            template: 'controller.ts.ejs',
+            target: `src/modules/${nameCamelCase}/http/controllers/${nameCamelCaseUpperFirst}Controller.ts`,
+            props: {
+                nameCamelCase,
+                nameCamelCaseUpperFirst,
+                properties,
+            },
+        });
+
         print.success(`Successfully generated CRUD.`);
     },
 };

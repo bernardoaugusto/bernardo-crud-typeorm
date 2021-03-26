@@ -19,7 +19,7 @@ export default class Update<%= props.nameCamelCaseUpperFirst %>Service {
         <%= props.nameCamelCase %>DataUpdates: I<%= props.nameCamelCaseUpperFirst %>UpdateDTO,
         <%= props.nameCamelCase %>Id: string,
     ): Promise<<%= props.nameCamelCaseUpperFirst %>> {
-        const <%= props.nameCamelCase %> = await this.getById<%= props.nameCamelCaseUpperFirst %>Service.execute(<%= props.nameCamelCase %>Id<% if (props.tenantid) { %>, tenantid<% }%>);
+        const <%= props.nameCamelCase %> = await this.getById<%= props.nameCamelCaseUpperFirst %>Service.execute(<%= props.nameCamelCase %>Id);
 
         Object.assign(<%= props.nameCamelCase %>, <%= props.nameCamelCase %>DataUpdates);
 

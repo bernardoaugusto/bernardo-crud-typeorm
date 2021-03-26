@@ -1,98 +1,29 @@
-import { Response, Request } from 'express';
+import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
-import { <%= props.nameCamelCaseUpperFirst %>RequestGetAllInterface } from '../interfaces/<%= props.nameCamelCase %>';
-import <%= props.nameCamelCaseUpperFirst %>Service from '../services/<%= props.nameCamelCaseUpperFirst %>Service';
-import { UserRequestInterface } from '../interfaces/metadata/RelationalWithoutTenantid';
-import { getAll<%= props.nameCamelCaseUpperFirst %>Schema } from '../utils/<%= props.nameCamelCase %>/validators';
+import Create<%= props.nameCamelCaseUpperFirst %>Service from '../../services/Create<%= props.nameCamelCaseUpperFirst %>Service';
+import Update<%= props.nameCamelCaseUpperFirst %>Service from '../../services/Update<%= props.nameCamelCaseUpperFirst %>Service';
 
-export const create = async (req: Request, res: Response): Promise<Response> => {
-    const <%= props.nameCamelCase %>Data = req.body;
-    const userRequestData: UserRequestInterface = {
-        username: req.headers.username as string,
-        useremail: req.headers.useremail as string,
-    };
-    <% if (props.tenantid) { %>const tenantid = req.headers.tenantid as string;<% }%>
+export default class <%= props.nameCamelCaseUpperFirst %>Controller {
+    public async create(request: Request, response: Response): Promise<Response> {
+        const <%= props.nameCamelCase %> = request.body;
 
-    const <%= props.nameCamelCase %>Service = container.resolve(<%= props.nameCamelCaseUpperFirst %>Service);
-    const response = await <%= props.nameCamelCase %>Service.create(<%= props.nameCamelCase %>Data, userRequestData<% if (props.tenantid) { %>, tenantid<% }%>);
+        const create<%= props.nameCamelCaseUpperFirst %>Service = container.resolve(Create<%= props.nameCamelCaseUpperFirst %>Service);
 
-    return res.status(201).json(response);
-};
+        const <%= props.nameCamelCase %>Created = await create<%= props.nameCamelCaseUpperFirst %>Service.execute(<%= props.nameCamelCase %>);
 
-export const findOne = async (req: Request, res: Response): Promise<Response> => {
-    const <%= props.nameCamelCase %>Id = req.params.id;
-    <% if (props.tenantid) { %>const tenantid = req.headers.tenantid as string;<% }%>
+        return response.status(201).json(classToClass(<%= props.nameCamelCase %>Created));
+    }
 
-    const <%= props.nameCamelCase %>Service = container.resolve(<%= props.nameCamelCaseUpperFirst %>Service);
-    const response = await <%= props.nameCamelCase %>Service.findById(<%= props.nameCamelCase %>Id<% if (props.tenantid) { %>, tenantid<% }%>);
+    public async update(request: Request, response: Response): Promise<Response> {
+        const updates = request.body;
+        const <%= props.nameCamelCase %>Id = request.params.id;
 
-    return res.status(200).json(response);
-};
+        const update<%= props.nameCamelCaseUpperFirst %>Service = container.resolve(Update<%= props.nameCamelCaseUpperFirst %>Service);
 
-export const findAll = async (req: Request, res: Response): Promise<Response> => {
-    <% if (props.tenantid) { %>const tenantid = req.headers.tenantid as string;<% }%>
-    const query = (await getAll<%= props.nameCamelCaseUpperFirst %>Schema.validate(req.query, {
-        stripUnknown: true,
-    })) as <%= props.nameCamelCaseUpperFirst %>RequestGetAllInterface;
+        const <%= props.nameCamelCase %>Updated = await update<%= props.nameCamelCaseUpperFirst %>Service.execute(updates, <%= props.nameCamelCase %>Id);
 
-    const withPagination = JSON.parse(query.withPagination || 'true');
-    const showInactive = JSON.parse(query.showInactive || 'false');
-
-    const <%= props.nameCamelCase %>Service = container.resolve(<%= props.nameCamelCaseUpperFirst %>Service);
-    const response = await <%= props.nameCamelCase %>Service.getAll(query, withPagination, showInactive<% if (props.tenantid) { %>, tenantid<% }%>);
-
-    return res.status(200).json(response);
-};
-
-export const update = async (req: Request, res: Response): Promise<Response> => {
-    <% if (props.tenantid) { %>const tenantid = req.headers.tenantid as string;<% }%>
-    const updates = req.body;
-    const <%= props.nameCamelCase %>Id = req.params.id;
-    const userRequestData: UserRequestInterface = {
-        username: req.headers.username as string,
-        useremail: req.headers.useremail as string,
-    };
-
-    const <%= props.nameCamelCase %>Service = container.resolve(<%= props.nameCamelCaseUpperFirst %>Service);
-
-    const response = await <%= props.nameCamelCase %>Service.update(
-        <%= props.nameCamelCase %>Id,
-        updates,
-        userRequestData,
-        <% if (props.tenantid) { %>tenantid,<% }%>
-    );
-
-    return res.status(200).json(response);
-};
-
-export const activation = async (req: Request, res: Response): Promise<Response> => {
-    <% if (props.tenantid) { %>const tenantid = req.headers.tenantid as string;<% }%>
-    const <%= props.nameCamelCase %>Id = req.params.id;
-    const userRequestData: UserRequestInterface = {
-        username: req.headers.username as string,
-        useremail: req.headers.useremail as string,
-    };
-
-    const <%= props.nameCamelCase %>Service = container.resolve(<%= props.nameCamelCaseUpperFirst %>Service);
-    await <%= props.nameCamelCase %>Service.activation(userRequestData, <%= props.nameCamelCase %>Id<% if (props.tenantid) { %>, tenantid<% }%>);
-
-    return res.status(204).json();
-};
-
-export const inactivation = async (
-    req: Request,
-    res: Response,
-): Promise<Response> => {
-    <% if (props.tenantid) { %>const tenantid = req.headers.tenantid as string;<% }%>
-    const <%= props.nameCamelCase %>Id = req.params.id;
-    const userRequestData: UserRequestInterface = {
-        username: req.headers.username as string,
-        useremail: req.headers.useremail as string,
-    };
-
-    const <%= props.nameCamelCase %>Service = container.resolve(<%= props.nameCamelCaseUpperFirst %>Service);
-    await <%= props.nameCamelCase %>Service.inactivation(userRequestData, <%= props.nameCamelCase %>Id<% if (props.tenantid) { %>, tenantid<% }%>);
-
-    return res.status(204).json();
-};
+        return response.json(classToClass(<%= props.nameCamelCase %>Updated));
+    }
+}
