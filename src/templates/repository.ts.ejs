@@ -1,9 +1,9 @@
 import { Repository, getRepository } from 'typeorm';
 import { typeorm } from '@seidor-cloud-produtos/lib-seidor-common';
 
-<% if (props.architecture === 'clean-architecture') { %>import <%= props.nameCamelCaseUpperFirst %> from '../entities/<%= props.nameCamelCaseUpperFirst %>';<% } else{ %>import <%= props.nameCamelCaseUpperFirst %> from '../database/entities/<%= props.nameCamelCaseUpperFirst %>';<% } %>
-<% if (props.architecture === 'clean-architecture') { %>import { <%= props.nameCamelCaseUpperFirst %>Interface } from '../../../../dtos/I<%= props.nameCamelCaseUpperFirst %>DTO';<% } else{ %>import { <%= props.nameCamelCaseUpperFirst %>Interface } from '../interfaces/<%= props.nameCamelCase %>';<% } %>
-<% if (props.architecture === 'clean-architecture') { %>import I<%= props.nameCamelCaseUpperFirst %>Repository from '../../../../repositories/<%= props.nameCamelCaseUpperFirst %>Repository';<% } else{ %>import I<%= props.nameCamelCaseUpperFirst %>Repository from '../interfaces/repositories/I<%= props.nameCamelCaseUpperFirst %>Repository';<% } %>
+import <%= props.nameCamelCaseUpperFirst %> from '../entities/<%= props.nameCamelCaseUpperFirst %>';
+import I<%= props.nameCamelCaseUpperFirst %>DTO from '../../../../dtos/I<%= props.nameCamelCaseUpperFirst %>DTO';
+import I<%= props.nameCamelCaseUpperFirst %>Repository from '../../../../repositories/I<%= props.nameCamelCaseUpperFirst %>RepositoryDTO';
 
 export default class <%= props.nameCamelCaseUpperFirst %>Repository implements I<%= props.nameCamelCaseUpperFirst %>Repository {
     private ormRepository: Repository<<%= props.nameCamelCaseUpperFirst %>>;
@@ -12,17 +12,18 @@ export default class <%= props.nameCamelCaseUpperFirst %>Repository implements I
         this.ormRepository = getRepository(<%= props.nameCamelCaseUpperFirst %>);
     }
 
-    public async createAndSave(
-        <%= props.nameCamelCase %>Data: <%= props.nameCamelCaseUpperFirst %>Interface,
-    ): Promise<<%= props.nameCamelCaseUpperFirst %>> {
+    public async create(<%= props.nameCamelCase %>Data: I<%= props.nameCamelCaseUpperFirst %>DTO): Promise<<%= props.nameCamelCaseUpperFirst %>> {
         const <%= props.nameCamelCase %> = this.ormRepository.create(<%= props.nameCamelCase %>Data);
 
         return this.ormRepository.save(<%= props.nameCamelCase %>);
     }
 
-    public async findById(
-        id: string<% if (props.tenantid) { %>, tenantid: string<% }%>): Promise<<%= props.nameCamelCaseUpperFirst %> | undefined> {
-        return this.ormRepository.findOne({ where: { id<% if (props.tenantid) { %>, tenantid<% }%> } });
+    public async findById(id: string): Promise<<%= props.nameCamelCaseUpperFirst %> | undefined> {
+        return this.ormRepository.findOne({ where: { id } });
+    }
+
+    public async update(updates: <%= props.nameCamelCaseUpperFirst %>): Promise<<%= props.nameCamelCaseUpperFirst %>> {
+        return this.ormRepository.save(updates);
     }
 
     public async getAllWithPagination(
@@ -37,5 +38,9 @@ export default class <%= props.nameCamelCaseUpperFirst %>Repository implements I
         options: typeorm.OptionsTypeOrmGetAllWithoutPagination,
     ): Promise<<%= props.nameCamelCaseUpperFirst %>[]> {
         return this.ormRepository.find(options);
+    }
+
+    public async remove(id: string): Promise<void> {
+        await this.ormRepository.delete(id);
     }
 }
