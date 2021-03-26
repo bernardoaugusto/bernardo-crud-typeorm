@@ -1,9 +1,9 @@
 {
-    "name": "node-crud-typeorm",
-    "version": "0.0.19",
-    "description": "node-crud-typeorm CLI",
+    "name": "@bernardo/crud-typeorm",
+    "version": "0.0.1",
+    "description": "CRUD typeorm CLI",
     "bin": {
-        "node-crud-typeorm": "bin/node-crud-typeorm"
+        "crud-typeorm": "bin/crud-typeorm"
     },
     "scripts": {
         "clean-build": "rm -rf ./dist",

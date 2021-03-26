@@ -1,0 +1,14 @@
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+
+@Entity('<%= props.tableName %>')
+export default class <%= props.nameCamelCaseUpperFirst %> {
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
+<% props.properties.original.strings.forEach((propertie) => { %>
+    @Column()
+    <%= propertie %>: string;
+<%}); %><% props.properties.original.numbers.forEach((propertie) => { %>
+    @Column()
+    <%= propertie %>: number;
+<% }); %>
+}

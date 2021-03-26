@@ -1,0 +1,6 @@
+import { typeorm } from '@seidor-cloud-produtos/lib-seidor-common';
+
+export interface I<%= props.nameCamelCaseUpperFirst %>RequestGetAllDTO extends typeorm.RequestGetAllInterface {<% props.properties.original.strings.forEach((propertie) => { %>
+    <%= propertie %>?: string;<%}); %><% props.properties.original.numbers.forEach((propertie) => { %>
+    <%= propertie %>?: number;<% }); %>
+}

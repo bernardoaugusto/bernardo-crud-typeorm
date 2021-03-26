@@ -8,10 +8,10 @@ module.exports = (toolbox: GluegunToolbox) => {
     };
 
     // enable this if you want to read configuration in from
-    // the current folder's package.json (in a "node-crud-typeorm" property),
-    // node-crud-typeorm.config.json, etc.
+    // the current folder's package.json (in a "crud-typeorm" property),
+    // crud-typeorm.config.json, etc.
     // toolbox.config = {
     //   ...toolbox.config,
-    //   ...toolbox.config.loadConfig("node-crud-typeorm", process.cwd())
+    //   ...toolbox.config.loadConfig("crud-typeorm", process.cwd())
     // }
 };

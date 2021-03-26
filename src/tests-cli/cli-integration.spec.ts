@@ -3,7 +3,7 @@ import { system, filesystem } from 'gluegun';
 const src = filesystem.path(__dirname, '../..');
 
 const cli = async (cmd: string) =>
-    system.run(`node ${filesystem.path(src, 'bin', 'node-crud-typeorm')} ${cmd}`);
+    system.run(`node ${filesystem.path(src, 'bin', 'crud-typeorm')} ${cmd}`);
 
 test('outputs version', async () => {
     const output = await cli('--version');

@@ -7,10 +7,10 @@ import { build } from 'gluegun';
 async function run(argv: any) {
     // create a CLI runtime
     const cli = build()
-        .brand('node-crud-typeorm')
+        .brand('crud-typeorm')
         .src(__dirname)
         .plugins('./node_modules', {
-            matching: 'node-crud-typeorm-*',
+            matching: 'crud-typeorm-*',
             hidden: true,
         })
         .help() // provides default for help, h, --help, -h

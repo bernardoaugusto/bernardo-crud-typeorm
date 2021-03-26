@@ -1,14 +1,14 @@
-# node-crud-typeorm CLI
+# crud-typeorm CLI
 ## Installation
 
 ```shell
-$ npm install -g node-crud-typeorm
+$ npm install -g crud-typeorm
 ```
 ```shell
-$ yarn global add node-crud-typeorm
+$ yarn global add crud-typeorm
 ```
 ## Generate CRUD
 
 ```shell
-node-crud-typeorm table-name --strings=name,cpf --numbers=test_number,code --tenantid=true
+crud-typeorm table-name --strings=name,cpf --numbers=test_number,code --tenantid=true
 ```
