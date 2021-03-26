@@ -6,13 +6,13 @@ import I<%= props.nameCamelCaseUpperFirst %>RequestGetAllDTO from '../dtos/I<%= 
 import I<%= props.nameCamelCaseUpperFirst %>RepositoryDTO from '../repositories/I<%= props.nameCamelCaseUpperFirst %>RepositoryDTO';
 
 @injectable()
-export default class <%= props.nameCamelCaseUpperFirst %>Service {
+export default class GetAll<%= props.nameCamelCaseUpperFirst %>Service {
     constructor(
         @inject('<%= props.nameCamelCaseUpperFirst %>Repository')
         private <%= props.nameCamelCase %>Repository: I<%= props.nameCamelCaseUpperFirst %>RepositoryDTO,
     ) {}
 
-    public async getAll(
+    public async execute(
         queryParams: I<%= props.nameCamelCaseUpperFirst %>RequestGetAllDTO,
         withPagination: boolean,
     ): Promise<

@@ -147,6 +147,15 @@ const command: GluegunCommand = {
                 properties,
             },
         });
+        await template.generate({
+            template: 'services/serviceUpdate.ts.ejs',
+            target: `src/modules/${nameCamelCase}/services/Update${nameCamelCaseUpperFirst}Service.ts`,
+            props: {
+                nameCamelCase,
+                nameCamelCaseUpperFirst,
+                properties,
+            },
+        });
 
         print.success(`Successfully generated CRUD.`);
     },

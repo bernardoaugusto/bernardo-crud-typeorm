@@ -5,7 +5,7 @@ import <%= props.nameCamelCaseUpperFirst %> from '../infra/http/typeorm/entities
 import I<%= props.nameCamelCaseUpperFirst %>RepositoryDTO from '../repositories/I<%= props.nameCamelCaseUpperFirst %>RepositoryDTO';
 
 @injectable()
-export default class <%= props.nameCamelCaseUpperFirst %>Service {
+export default class GetById<%= props.nameCamelCaseUpperFirst %>Service {
     constructor(
         @inject('<%= props.nameCamelCaseUpperFirst %>Repository')
         private <%= props.nameCamelCase %>Repository: I<%= props.nameCamelCaseUpperFirst %>RepositoryDTO,
