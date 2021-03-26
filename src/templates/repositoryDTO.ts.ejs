@@ -1,0 +1,20 @@
+import { typeorm } from '@seidor-cloud-produtos/lib-seidor-common';
+
+import <%= props.nameCamelCaseUpperFirst %> from '../infra/http/typeorm/entities/<%= props.nameCamelCaseUpperFirst %>';
+import I<%= props.nameCamelCaseUpperFirst %>CreateDTO from '../dtos/I<%= props.nameCamelCaseUpperFirst %>CreateDTO';
+
+export default interface I<%= props.nameCamelCaseUpperFirst %>Repository {
+    create(
+        <%= props.nameCamelCase %>Data: I<%= props.nameCamelCaseUpperFirst %>CreateDTO,
+    ): Promise<<%= props.nameCamelCaseUpperFirst %>>;
+    update(
+        updates: <%= props.nameCamelCaseUpperFirst %>,
+    ): Promise<<%= props.nameCamelCaseUpperFirst %>>;
+    findById(id: string): Promise<<%= props.nameCamelCaseUpperFirst %> | undefined>;
+    remove(id: string): Promise<void>;
+    getAllWithPagination(
+        options: typeorm.OptionsTypeOrmGetAllWithPagination,
+    ): Promise<{ data: <%= props.nameCamelCaseUpperFirst %>[]; count: number }>;
+    getAllWithoutPagination(options: typeorm.OptionsTypeOrmGetAllWithoutPagination): Promise<<%= props.nameCamelCaseUpperFirst %>[]>;
+}
+

@@ -95,6 +95,18 @@ const command: GluegunCommand = {
             },
         });
 
+        // Repository DTO
+        await template.generate({
+            template: 'repositoryDTO.ts.ejs',
+            target: `src/modules/${nameCamelCase}/repositories/I${nameCamelCaseUpperFirst}RepositoryDTO.ts`,
+            props: {
+                tableName,
+                nameCamelCaseUpperFirst,
+                nameCamelCase,
+                properties,
+            },
+        });
+
         print.success(`Successfully generated CRUD.`);
     },
 };

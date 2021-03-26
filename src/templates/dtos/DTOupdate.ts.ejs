@@ -1,4 +1,4 @@
-export interface I<%= props.nameCamelCaseUpperFirst %>UpdateDTO {<% props.properties.original.strings.forEach((propertie) => { %>
+export default interface I<%= props.nameCamelCaseUpperFirst %>UpdateDTO {<% props.properties.original.strings.forEach((propertie) => { %>
     <%= propertie %>?: string;<%}); %><% props.properties.original.numbers.forEach((propertie) => { %>
     <%= propertie %>?: number;<% }); %>
 }
