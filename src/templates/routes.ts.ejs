@@ -3,8 +3,6 @@ import { celebrate, Segments } from 'celebrate';
 
 import configValidateRoute from '../../../../config/route';
 import <%= props.nameCamelCaseUpperFirst %>Controller from '../controllers/<%= props.nameCamelCaseUpperFirst %>Controller';
-
-
 import { create<%= props.nameCamelCaseUpperFirst %>Schema } from '../../common/validations/create<%= props.nameCamelCaseUpperFirst %>Validator';
 import { update<%= props.nameCamelCaseUpperFirst %>Schema } from '../../common/validations/update<%= props.nameCamelCaseUpperFirst %>Validator';
 import { validateIdSchema } from '../../../../shared/common/validations/validateId';
@@ -23,8 +21,21 @@ router.post(
     <%= props.nameCamelCase %>Controller.create,
 );
 
+router.get(
+    '/:id',
+    celebrate(
+        {
+            [Segments.PARAMS]: validateIdSchema,
+        },
+        configValidateRoute,
+    ),
+    <%= props.nameCamelCase %>Controller.getById,
+);
+
+router.get('/', <%= props.nameCamelCase %>Controller.getAll);
+
 router.put(
-    '/',
+    '/:id',
     celebrate(
         {
             [Segments.BODY]: update<%= props.nameCamelCaseUpperFirst %>Schema,
@@ -33,6 +44,17 @@ router.put(
         configValidateRoute,
     ),
     <%= props.nameCamelCase %>Controller.update,
+);
+
+router.delete(
+    '/:id',
+    celebrate(
+        {
+            [Segments.PARAMS]: validateIdSchema,
+        },
+        configValidateRoute,
+    ),
+    <%= props.nameCamelCase %>Controller.remove,
 );
 
 export default router;
