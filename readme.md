@@ -2,10 +2,10 @@
 ## Installation
 
 ```shell
-$ npm install -g crud-typeorm
+$ npm install -g bernardo-crud-typeorm
 ```
 ```shell
-$ yarn global add crud-typeorm
+$ yarn global add bernardo-crud-typeorm
 ```
 ## Generate CRUD
 
