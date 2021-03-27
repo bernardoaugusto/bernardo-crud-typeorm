@@ -1,0 +1,6 @@
+import { Joi } from 'celebrate';
+
+export const create<%= props.nameCamelCaseUpperFirst %>Schema = {<% props.properties.original.strings.forEach((propertie) => { %>
+    <%= propertie %>: Joi.string().strict(true).required(),<%}); %><% props.properties.original.numbers.forEach((propertie) => { %>
+    <%= propertie %>: Joi.number().strict(true).required(),<% }); %>
+};

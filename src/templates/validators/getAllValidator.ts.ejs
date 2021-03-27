@@ -1,0 +1,7 @@
+import { Joi } from 'celebrate';
+
+export const update<%= props.nameCamelCaseUpperFirst %>Schema = {<% props.properties.original.strings.forEach((propertie) => { %>
+    <%= propertie %>: Joi.string().strict(true).optional(),<%}); %><% props.properties.original.numbers.forEach((propertie) => { %>
+    <%= propertie %>: Joi.string().strict(true).optional(),<% }); %>
+    withPagination: Joi.string().strict(true).optional(),
+};

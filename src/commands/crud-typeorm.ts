@@ -1,4 +1,6 @@
+import fs from 'fs';
 import { GluegunCommand } from 'gluegun';
+
 import {
     generateCamelCase,
     generateCamelCaseArray,
@@ -47,10 +49,11 @@ const command: GluegunCommand = {
         };
 
         // DEPENDENCYS
-        await template.generate({
-            template: 'dependencys/appError.ts.ejs',
-            target: `src/shared/errors/AppError.ts`,
-        });
+        if (!fs.existsSync('./src/shared/errors/AppError.ts'))
+            await template.generate({
+                template: 'dependencys/appError.ts.ejs',
+                target: `src/shared/errors/AppError.ts`,
+            });
 
         // ENTITY
         await template.generate({
@@ -159,6 +162,35 @@ const command: GluegunCommand = {
         await template.generate({
             template: 'services/serviceRemove.ts.ejs',
             target: `src/modules/${nameCamelCase}/services/Remove${nameCamelCaseUpperFirst}Service.ts`,
+            props: {
+                nameCamelCase,
+                nameCamelCaseUpperFirst,
+                properties,
+            },
+        });
+
+        // Validator
+        await template.generate({
+            template: 'validators/createValidator.ts.ejs',
+            target: `src/modules/${nameCamelCase}/common/validations/create${nameCamelCaseUpperFirst}Validator.ts`,
+            props: {
+                nameCamelCase,
+                nameCamelCaseUpperFirst,
+                properties,
+            },
+        });
+        await template.generate({
+            template: 'validators/updateValidator.ts.ejs',
+            target: `src/modules/${nameCamelCase}/common/validations/update${nameCamelCaseUpperFirst}Validator.ts`,
+            props: {
+                nameCamelCase,
+                nameCamelCaseUpperFirst,
+                properties,
+            },
+        });
+        await template.generate({
+            template: 'validators/getAllValidator.ts.ejs',
+            target: `src/modules/${nameCamelCase}/common/validations/getAll${nameCamelCaseUpperFirst}Validator.ts`,
             props: {
                 nameCamelCase,
                 nameCamelCaseUpperFirst,
