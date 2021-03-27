@@ -30,7 +30,7 @@ export default class <%= props.nameCamelCaseUpperFirst %>Controller {
     }
 
     public async getAll(request: Request, response: Response): Promise<Response> {
-        const { query } = request;
+        const query = request.query as Record<string, string>;
         const withPagination = JSON.parse(query.withPagination || 'true');
 
         const getAll<%= props.nameCamelCaseUpperFirst %>Service = container.resolve(GetAll<%= props.nameCamelCaseUpperFirst %>Service);

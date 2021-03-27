@@ -188,15 +188,15 @@ const command: GluegunCommand = {
                 properties,
             },
         });
-        await template.generate({
-            template: 'validators/getAllValidator.ts.ejs',
-            target: `src/modules/${nameCamelCase}/common/validations/getAll${nameCamelCaseUpperFirst}Validator.ts`,
-            props: {
-                nameCamelCase,
-                nameCamelCaseUpperFirst,
-                properties,
-            },
-        });
+        // await template.generate({
+        //     template: 'validators/getAllValidator.ts.ejs',
+        //     target: `src/modules/${nameCamelCase}/common/validations/getAll${nameCamelCaseUpperFirst}Validator.ts`,
+        //     props: {
+        //         nameCamelCase,
+        //         nameCamelCaseUpperFirst,
+        //         properties,
+        //     },
+        // });
 
         // Controller
         await template.generate({
