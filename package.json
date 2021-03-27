@@ -1,5 +1,5 @@
 {
-    "name": "@bernardo/crud-typeorm",
+    "name": "bernardo-crud-typeorm",
     "version": "0.0.1",
     "description": "CRUD typeorm CLI",
     "bin": {
