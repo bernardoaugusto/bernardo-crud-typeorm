@@ -4,6 +4,7 @@ import { classToClass } from 'class-transformer';
 
 import Create<%= props.nameCamelCaseUpperFirst %>Service from '../../services/Create<%= props.nameCamelCaseUpperFirst %>Service';
 import Update<%= props.nameCamelCaseUpperFirst %>Service from '../../services/Update<%= props.nameCamelCaseUpperFirst %>Service';
+import GetById<%= props.nameCamelCaseUpperFirst %>Service from '../../services/GetById<%= props.nameCamelCaseUpperFirst %>Service';
 
 export default class <%= props.nameCamelCaseUpperFirst %>Controller {
     public async create(request: Request, response: Response): Promise<Response> {
@@ -14,6 +15,16 @@ export default class <%= props.nameCamelCaseUpperFirst %>Controller {
         const <%= props.nameCamelCase %>Created = await create<%= props.nameCamelCaseUpperFirst %>Service.execute(<%= props.nameCamelCase %>);
 
         return response.status(201).json(classToClass(<%= props.nameCamelCase %>Created));
+    }
+
+    public async getById(request: Request, response: Response): Promise<Response> {
+        const <%= props.nameCamelCase %>Id = request.params.id;
+
+        const getById<%= props.nameCamelCaseUpperFirst %>Service = container.resolve(GetById<%= props.nameCamelCaseUpperFirst %>Service);
+
+        const <%= props.nameCamelCase %> = await getById<%= props.nameCamelCaseUpperFirst %>Service.execute(<%= props.nameCamelCase %>Id);
+
+        return response.json(classToClass(<%= props.nameCamelCase %>));
     }
 
     public async update(request: Request, response: Response): Promise<Response> {
