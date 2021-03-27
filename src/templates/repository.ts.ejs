@@ -2,8 +2,8 @@ import { Repository, getRepository } from 'typeorm';
 import { typeorm } from '@seidor-cloud-produtos/lib-seidor-common';
 
 import <%= props.nameCamelCaseUpperFirst %> from '../entities/<%= props.nameCamelCaseUpperFirst %>';
-import I<%= props.nameCamelCaseUpperFirst %>DTO from '../../../../dtos/I<%= props.nameCamelCaseUpperFirst %>DTO';
-import I<%= props.nameCamelCaseUpperFirst %>Repository from '../../../../repositories/I<%= props.nameCamelCaseUpperFirst %>RepositoryDTO';
+import I<%= props.nameCamelCaseUpperFirst %>DTO from '../../../dtos/I<%= props.nameCamelCaseUpperFirst %>DTO';
+import I<%= props.nameCamelCaseUpperFirst %>Repository from '../../../repositories/I<%= props.nameCamelCaseUpperFirst %>RepositoryDTO';
 
 export default class <%= props.nameCamelCaseUpperFirst %>Repository implements I<%= props.nameCamelCaseUpperFirst %>Repository {
     private ormRepository: Repository<<%= props.nameCamelCaseUpperFirst %>>;

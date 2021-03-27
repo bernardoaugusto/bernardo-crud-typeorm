@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import { celebrate, Segments } from 'celebrate';
 
-import configValidateRoute from '../../../../config/route';
+import configValidateRoute from '../../../../../config/route';
 import <%= props.nameCamelCaseUpperFirst %>Controller from '../controllers/<%= props.nameCamelCaseUpperFirst %>Controller';
-import { create<%= props.nameCamelCaseUpperFirst %>Schema } from '../../common/validations/create<%= props.nameCamelCaseUpperFirst %>Validator';
-import { update<%= props.nameCamelCaseUpperFirst %>Schema } from '../../common/validations/update<%= props.nameCamelCaseUpperFirst %>Validator';
-import { validateIdSchema } from '../../../../shared/common/validations/validateId';
+import { create<%= props.nameCamelCaseUpperFirst %>Schema } from '../../../common/validations/create<%= props.nameCamelCaseUpperFirst %>Validator';
+import { update<%= props.nameCamelCaseUpperFirst %>Schema } from '../../../common/validations/update<%= props.nameCamelCaseUpperFirst %>Validator';
+import { validateIdSchema } from '../../../../../shared/common/validations/validateId';
 
 const router = Router();
 const <%= props.nameCamelCase %>Controller = new <%= props.nameCamelCaseUpperFirst %>Controller();

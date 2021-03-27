@@ -2,11 +2,11 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { classToClass } from 'class-transformer';
 
-import Create<%= props.nameCamelCaseUpperFirst %>Service from '../../services/Create<%= props.nameCamelCaseUpperFirst %>Service';
-import GetById<%= props.nameCamelCaseUpperFirst %>Service from '../../services/GetById<%= props.nameCamelCaseUpperFirst %>Service';
-import GetAll<%= props.nameCamelCaseUpperFirst %>Service from '../../services/GetAll<%= props.nameCamelCaseUpperFirst %>Service';
-import Update<%= props.nameCamelCaseUpperFirst %>Service from '../../services/Update<%= props.nameCamelCaseUpperFirst %>Service';
-import Remove<%= props.nameCamelCaseUpperFirst %>Service from '../../services/Remove<%= props.nameCamelCaseUpperFirst %>Service';
+import Create<%= props.nameCamelCaseUpperFirst %>Service from '../../../services/Create<%= props.nameCamelCaseUpperFirst %>Service';
+import GetById<%= props.nameCamelCaseUpperFirst %>Service from '../../../services/GetById<%= props.nameCamelCaseUpperFirst %>Service';
+import GetAll<%= props.nameCamelCaseUpperFirst %>Service from '../../../services/GetAll<%= props.nameCamelCaseUpperFirst %>Service';
+import Update<%= props.nameCamelCaseUpperFirst %>Service from '../../../services/Update<%= props.nameCamelCaseUpperFirst %>Service';
+import Remove<%= props.nameCamelCaseUpperFirst %>Service from '../../../services/Remove<%= props.nameCamelCaseUpperFirst %>Service';
 
 export default class <%= props.nameCamelCaseUpperFirst %>Controller {
     public async create(request: Request, response: Response): Promise<Response> {

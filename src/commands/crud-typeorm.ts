@@ -68,7 +68,7 @@ const command: GluegunCommand = {
         // ENTITY
         await template.generate({
             template: 'entity.ts.ejs',
-            target: `src/modules/${nameCamelCase}/infra/http/typeorm/entities/${nameCamelCaseUpperFirst}.ts`,
+            target: `src/modules/${nameCamelCase}/infra/typeorm/entities/${nameCamelCaseUpperFirst}.ts`,
             props: {
                 tableName,
                 nameCamelCaseUpperFirst,
@@ -124,7 +124,7 @@ const command: GluegunCommand = {
         // Repository
         await template.generate({
             template: 'repository.ts.ejs',
-            target: `src/modules/${nameCamelCase}/infra/http/typeorm/repositories/${nameCamelCaseUpperFirst}Repository.ts`,
+            target: `src/modules/${nameCamelCase}/infra/typeorm/repositories/${nameCamelCaseUpperFirst}Repository.ts`,
             props: {
                 nameCamelCaseUpperFirst,
                 nameCamelCase,
@@ -211,7 +211,7 @@ const command: GluegunCommand = {
         // Controller
         await template.generate({
             template: 'controller.ts.ejs',
-            target: `src/modules/${nameCamelCase}/http/controllers/${nameCamelCaseUpperFirst}Controller.ts`,
+            target: `src/modules/${nameCamelCase}/infra/http/controllers/${nameCamelCaseUpperFirst}Controller.ts`,
             props: {
                 nameCamelCase,
                 nameCamelCaseUpperFirst,
@@ -222,7 +222,7 @@ const command: GluegunCommand = {
         // Routes
         await template.generate({
             template: 'routes.ts.ejs',
-            target: `src/modules/${nameCamelCase}/http/routes/${nameCamelCase}.routes.ts`,
+            target: `src/modules/${nameCamelCase}/infra/http/routes/${nameCamelCase}.routes.ts`,
             props: {
                 nameCamelCase,
                 nameCamelCaseUpperFirst,

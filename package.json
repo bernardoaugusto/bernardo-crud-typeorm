@@ -1,6 +1,6 @@
 {
     "name": "bernardo-crud-typeorm",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "CRUD typeorm CLI",
     "bin": {
         "crud-typeorm": "bin/crud-typeorm"
@@ -20,7 +20,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/bernardoaugusto/cli-generate-crud-nodejs-with-typeorm.git"
+        "url": "git+https://github.com/bernardoaugusto/bernardo-crud-typeorm.git"
     },
     "license": "MIT",
     "dependencies": {

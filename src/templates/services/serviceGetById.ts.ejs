@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import AppError from '../../../shared/errors/AppError';
 
-import <%= props.nameCamelCaseUpperFirst %> from '../infra/http/typeorm/entities/<%= props.nameCamelCaseUpperFirst %>';
+import <%= props.nameCamelCaseUpperFirst %> from '../infra/typeorm/entities/<%= props.nameCamelCaseUpperFirst %>';
 import I<%= props.nameCamelCaseUpperFirst %>RepositoryDTO from '../repositories/I<%= props.nameCamelCaseUpperFirst %>RepositoryDTO';
 
 @injectable()
