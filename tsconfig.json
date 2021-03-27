@@ -12,7 +12,12 @@
         "baseUrl": "./lib",
         "esModuleInterop": true,
         "emitDecoratorMetadata": true,
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "paths": {
+            "@modules/*": ["modules/*"],
+            "@config/*": ["config/*"],
+            "@shared/*": ["shared/*"]
+        }
     },
     "include": ["src/**/*.ts"],
     "exclude": ["node_modules"]

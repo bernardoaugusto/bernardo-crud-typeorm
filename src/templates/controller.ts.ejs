@@ -3,8 +3,10 @@ import { container } from 'tsyringe';
 import { classToClass } from 'class-transformer';
 
 import Create<%= props.nameCamelCaseUpperFirst %>Service from '../../services/Create<%= props.nameCamelCaseUpperFirst %>Service';
-import Update<%= props.nameCamelCaseUpperFirst %>Service from '../../services/Update<%= props.nameCamelCaseUpperFirst %>Service';
 import GetById<%= props.nameCamelCaseUpperFirst %>Service from '../../services/GetById<%= props.nameCamelCaseUpperFirst %>Service';
+import GetAll<%= props.nameCamelCaseUpperFirst %>Service from '../../services/GetAll<%= props.nameCamelCaseUpperFirst %>Service';
+import Update<%= props.nameCamelCaseUpperFirst %>Service from '../../services/Update<%= props.nameCamelCaseUpperFirst %>Service';
+import Remove<%= props.nameCamelCaseUpperFirst %>Service from '../../services/Remove<%= props.nameCamelCaseUpperFirst %>Service';
 
 export default class <%= props.nameCamelCaseUpperFirst %>Controller {
     public async create(request: Request, response: Response): Promise<Response> {
@@ -24,7 +26,17 @@ export default class <%= props.nameCamelCaseUpperFirst %>Controller {
 
         const <%= props.nameCamelCase %> = await getById<%= props.nameCamelCaseUpperFirst %>Service.execute(<%= props.nameCamelCase %>Id);
 
-        return response.json(classToClass(<%= props.nameCamelCase %>));
+        return response.status(200).json(classToClass(<%= props.nameCamelCase %>));
+    }
+
+    public async getAll(request: Request, response: Response): Promise<Response> {
+        const { query } = request;
+        const withPagination = JSON.parse(query.withPagination || 'true');
+
+        const getAll<%= props.nameCamelCaseUpperFirst %>Service = container.resolve(GetAll<%= props.nameCamelCaseUpperFirst %>Service);
+        const <%= props.nameCamelCase %> = await getAll<%= props.nameCamelCaseUpperFirst %>Service.execute(query, withPagination);
+
+        return response.status(200).json(classToClass(<%= props.nameCamelCase %>));
     }
 
     public async update(request: Request, response: Response): Promise<Response> {
@@ -35,6 +47,16 @@ export default class <%= props.nameCamelCaseUpperFirst %>Controller {
 
         const <%= props.nameCamelCase %>Updated = await update<%= props.nameCamelCaseUpperFirst %>Service.execute(updates, <%= props.nameCamelCase %>Id);
 
-        return response.json(classToClass(<%= props.nameCamelCase %>Updated));
+        return response.status(200).json(classToClass(<%= props.nameCamelCase %>Updated));
+    }
+
+    public async remove(request: Request, response: Response): Promise<Response> {
+        const <%= props.nameCamelCase %>Id = request.params.id;
+
+        const remove<%= props.nameCamelCaseUpperFirst %>Service = container.resolve(Remove<%= props.nameCamelCaseUpperFirst %>Service);
+
+        await remove<%= props.nameCamelCaseUpperFirst %>Service.execute(<%= props.nameCamelCase %>Id);
+
+        return response.status(204).json();
     }
 }
