@@ -54,6 +54,16 @@ const command: GluegunCommand = {
                 template: 'dependencys/appError.ts.ejs',
                 target: `src/shared/errors/AppError.ts`,
             });
+        if (!fs.existsSync('./src/config/route.ts'))
+            await template.generate({
+                template: 'dependencys/configRoutes.ts.ejs',
+                target: `src/config/route.ts`,
+            });
+        if (!fs.existsSync('./src/shared/common/validations/validateId.ts'))
+            await template.generate({
+                template: 'dependencys/validateId.ts.ejs',
+                target: `src/shared/common/validations/validateId.ts`,
+            });
 
         // ENTITY
         await template.generate({
@@ -202,6 +212,17 @@ const command: GluegunCommand = {
         await template.generate({
             template: 'controller.ts.ejs',
             target: `src/modules/${nameCamelCase}/http/controllers/${nameCamelCaseUpperFirst}Controller.ts`,
+            props: {
+                nameCamelCase,
+                nameCamelCaseUpperFirst,
+                properties,
+            },
+        });
+
+        // Routes
+        await template.generate({
+            template: 'routes.ts.ejs',
+            target: `src/modules/${nameCamelCase}/http/routes/${nameCamelCase}.routes.ts`,
             props: {
                 nameCamelCase,
                 nameCamelCaseUpperFirst,

@@ -1,304 +1,38 @@
 import { Router } from 'express';
-import { middleware, validation } from '@seidor-cloud-produtos/lib-seidor-common';
+import { celebrate, Segments } from 'celebrate';
 
-import * as <%= props.nameCamelCaseUpperFirst %>Controller from '../controllers/<%= props.nameCamelCase %>Controller';
-import {
-    create<%= props.nameCamelCaseUpperFirst %>Schema,
-    getAll<%= props.nameCamelCaseUpperFirst %>Schema,
-    update<%= props.nameCamelCaseUpperFirst %>Schema,
-} from '../utils/<%= props.nameCamelCase %>/validators';
+import configValidateRoute from '../../../../config/route';
+import <%= props.nameCamelCaseUpperFirst %>Controller from '../controllers/<%= props.nameCamelCaseUpperFirst %>Controller';
+
+
+import { create<%= props.nameCamelCaseUpperFirst %>Schema } from '../../common/validations/create<%= props.nameCamelCaseUpperFirst %>Validator';
+import { update<%= props.nameCamelCaseUpperFirst %>Schema } from '../../common/validations/update<%= props.nameCamelCaseUpperFirst %>Validator';
+import { validateIdSchema } from '../../../../shared/common/validations/validateId';
 
 const router = Router();
-
-/**
- * @swagger
- * /api/<%= props.tableName %>:
- *   post:
- *     tags:
- *       - <%= props.nameCamelCaseUpperFirst %>
- *     description: Create <%= props.nameCamelCaseUpperFirst %>
- *     produces:
- *       - application/json
- *     parameters:
- *       - in: header
- *         name: token
- *         type: string
- *         required: true
- *       - in: header
- *         name: x-api-key
- *         type: string
- *         required: true
- *       - name: <%= props.nameCamelCase %>
- *         description: JSON with <%= props.nameCamelCaseUpperFirst %> attributes.
- *         in: body
- *         required: true
- *         schema:
- *            $ref: '#/definitions/<%= props.nameCamelCaseUpperFirst %>Create'
- *     responses:
- *       201:
- *         description: Successful
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/definitions/<%= props.nameCamelCaseUpperFirst %>'
- */
+const <%= props.nameCamelCase %>Controller = new <%= props.nameCamelCaseUpperFirst %>Controller();
 
 router.post(
     '/',
-    middleware.validatorMiddleware({ body: create<%= props.nameCamelCaseUpperFirst %>Schema, headers: <% if (props.tenantid) { %>validation.commomValidators.tenantidSchema<% } else{ %>validation.commomValidators.userSchema<% } %> }),
-    <%= props.nameCamelCaseUpperFirst %>Controller.create,
+    celebrate(
+        {
+            [Segments.BODY]: create<%= props.nameCamelCaseUpperFirst %>Schema,
+        },
+        configValidateRoute,
+    ),
+    <%= props.nameCamelCase %>Controller.create,
 );
-
-/**
- * @swagger
- * /api/<%= props.tableName %>/:<%= props.nameCamelCase %>Id:
- *   get:
- *     tags:
- *       - <%= props.nameCamelCaseUpperFirst %>
- *     description: Get <%= props.nameCamelCaseUpperFirst %> by Id
- *     produces:
- *       - application/json
- *     parameters:
- *       - in: header
- *         name: token
- *         type: string
- *         required: true
- *       - in: header
- *         name: x-api-key
- *         type: string
- *         required: true
- *       - in: path
- *         name: <%= props.nameCamelCase %>Id
- *         type: uuid
- *         required: true
- *     responses:
- *       200:
- *         description: Successful
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/definitions/<%= props.nameCamelCaseUpperFirst %>'
- */
-
-router.get(
-    '/:id',
-    middleware.validatorMiddleware({ params: validation.commomValidators.idParamSchema, headers: <% if (props.tenantid) { %>validation.commomValidators.tenantidSchema<% } else{ %>validation.commomValidators.userSchema<% } %> }),
-    <%= props.nameCamelCaseUpperFirst %>Controller.findOne,
-);
-
-/**
- * @swagger
- * /api/<%= props.tableName %>:
- *   get:
- *     tags:
- *      - <%= props.nameCamelCaseUpperFirst %>
- *     description: GetAll <%= props.nameCamelCaseUpperFirst %>
- *     produces:
- *       - application/json
- *     parameters:
- *       - in: header
- *         name: token
- *         type: string
- *         required: true
- *       - in: header
- *         name: x-api-key
- *         type: string
- *         required: true
- *       - in: query
- *         name: page
- *         type: number
- *       - in: query
- *         name: size
- *         type: number
- *       - in: query
- *         name: withPagination
- *         type: boolean
- *       - in: query
- *         name: showInactive
- *         type: boolean
- *       - in: query
- *         name: sortParam
- *         type: string
- *         enum: [ <% props.properties.original.strings.forEach((propertie) => { %><%= propertie %>, <%}); %><% props.properties.original.numbers.forEach((propertie) => { %><%= propertie %>, <% }); %>created_at, created_by_name, created_by_email, updated_at, updated_by_name, updated_by_email, active, inactivation_date ]
- *       - in: query
- *         name: sortOrder
- *         type: string
- *         enum: [asc, desc, ASC, DESC]
- *       - in: query
- *         name: dateFilter
- *         type: enum [created_at, updated_at, inactivation_date]
- *       - in: query
- *         name: startDateFilter
- *         type: string
- *         example: '2021-01-01'
- *       - in: query
- *         name: endDateFilter
- *         type: string
- *         example: '2021-01-31'<% props.properties.original.strings.forEach((propertie) => { %>
- *       - in: query
- *         name: <%= propertie %>
- *         type: string<%}); %><% props.properties.original.numbers.forEach((propertie) => { %>
- *       - in: query
- *         name: <%= propertie %>
- *         type: number<% }); %>
- *       - in: query
- *         name: created_by_name
- *         type: string
- *       - in: query
- *         name: created_by_email
- *         type: string
- *       - in: query
- *         name: updated_by_name
- *         type: string
- *       - in: query
- *         name: updated_by_email
- *         type: string
- *       - in: query
- *         name: active
- *         type: boolean
- *     responses:
- *       200:
- *         description: Successful
- *         content:
- *           application/json:
- *             schema:
- *               oneOf:
- *                 - title: GetAll <%= props.nameCamelCaseUpperFirst %> with pagination
- *                   allOf:
- *                     - type: object
- *                       properties:
- *                         data:
- *                           type: array
- *                           items:
- *                             type: object
- *                             $ref: '#/definitions/<%= props.nameCamelCaseUpperFirst %>'
- *                     - $ref: '#/definitions/PaginationResponse'
- *                 - title: GetAll <%= props.nameCamelCaseUpperFirst %> without pagination
- *                   allOf:
- *                     - type: array
- *                       items:
- *                         type: object
- *                         $ref: '#/definitions/<%= props.nameCamelCaseUpperFirst %>'
- */
-
-router.get(
-    '/',
-    middleware.validatorMiddleware({ headers: <% if (props.tenantid) { %>validation.commomValidators.tenantidSchema<% } else{ %>validation.commomValidators.userSchema<% } %>, query: getAll<%= props.nameCamelCaseUpperFirst %>Schema }),
-    <%= props.nameCamelCaseUpperFirst %>Controller.findAll,
-);
-
-/**
- * @swagger
- * /api/<%= props.tableName %>/:<%= props.nameCamelCase %>Id:
- *   put:
- *     tags:
- *       - <%= props.nameCamelCaseUpperFirst %>
- *     description: Update <%= props.nameCamelCaseUpperFirst %>
- *     produces:
- *       - application/json
- *     parameters:
- *       - in: header
- *         name: token
- *         type: string
- *         required: true
- *       - in: header
- *         name: x-api-key
- *         type: string
- *         required: true
- *       - in: path
- *         name: <%= props.nameCamelCase %>Id
- *         type: uuid
- *         required: true
- *       - name: <%= props.nameCamelCase %>
- *         description: JSON with <%= props.nameCamelCase %> attributes.
- *         in: body
- *         required: true
- *         schema:
- *          $ref: '#/definitions/<%= props.nameCamelCaseUpperFirst %>Update'
- *
- *     responses:
- *       200:
- *         description: Successful
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/definitions/<%= props.nameCamelCaseUpperFirst %>'
- */
 
 router.put(
-    '/:id',
-    middleware.validatorMiddleware({
-        body: update<%= props.nameCamelCaseUpperFirst %>Schema,
-        params: validation.commomValidators.idParamSchema,
-        headers: <% if (props.tenantid) { %>validation.commomValidators.tenantidSchema<% } else{ %>validation.commomValidators.userSchema<% } %>,
-    }),
-    <%= props.nameCamelCaseUpperFirst %>Controller.update,
-);
-
-/**
- * @swagger
- * /api/<%= props.tableName %>/activation/:<%= props.nameCamelCase %>Id:
- *   post:
- *     tags:
- *       - <%= props.nameCamelCaseUpperFirst %>
- *     description: Activate <%= props.nameCamelCaseUpperFirst %>
- *     produces:
- *       - application/json
- *     parameters:
- *       - in: header
- *         name: token
- *         type: string
- *         required: true
- *       - in: header
- *         name: x-api-key
- *         type: string
- *         required: true
- *       - in: path
- *         name: <%= props.nameCamelCase %>Id
- *         type: uuid
- *         required: true
- *     responses:
- *       204:
- *         description: Successful
- */
-
-router.post(
-    '/activation/:id',
-    middleware.validatorMiddleware({ params: validation.commomValidators.idParamSchema, headers: <% if (props.tenantid) { %>validation.commomValidators.tenantidSchema<% } else{ %>validation.commomValidators.userSchema<% } %> }),
-    <%= props.nameCamelCaseUpperFirst %>Controller.activation,
-);
-
-/**
- * @swagger
- * /api/<%= props.tableName %>/inactivation/:<%= props.nameCamelCase %>Id:
- *   post:
- *     tags:
- *       - <%= props.nameCamelCaseUpperFirst %>
- *     description: Inactivate <%= props.nameCamelCaseUpperFirst %>
- *     produces:
- *       - application/json
- *     parameters:
- *       - in: header
- *         name: token
- *         type: string
- *         required: true
- *       - in: header
- *         name: x-api-key
- *         type: string
- *         required: true
- *       - in: path
- *         name: <%= props.nameCamelCase %>Id
- *         type: uuid
- *         required: true
- *     responses:
- *       204:
- *         description: Successful
- */
-
-router.post(
-    '/inactivation/:id',
-    middleware.validatorMiddleware({ params: validation.commomValidators.idParamSchema, headers: <% if (props.tenantid) { %>validation.commomValidators.tenantidSchema<% } else{ %>validation.commomValidators.userSchema<% } %> }),
-    <%= props.nameCamelCaseUpperFirst %>Controller.inactivation,
+    '/',
+    celebrate(
+        {
+            [Segments.BODY]: update<%= props.nameCamelCaseUpperFirst %>Schema,
+            [Segments.PARAMS]: validateIdSchema,
+        },
+        configValidateRoute,
+    ),
+    <%= props.nameCamelCase %>Controller.update,
 );
 
 export default router;

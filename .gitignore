@@ -8,3 +8,4 @@ build
 .vscode
 modules/
 shared/
+config/
