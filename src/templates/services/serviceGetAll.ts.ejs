@@ -1,5 +1,5 @@
 import { inject, injectable } from 'tsyringe';
-import { typeorm } from '@seidor-cloud-produtos/lib-seidor-common';
+import typeorm from '@seidor-cloud-produtos/typeorm';
 
 import <%= props.nameCamelCaseUpperFirst %> from '../infra/typeorm/entities/<%= props.nameCamelCaseUpperFirst %>';
 import I<%= props.nameCamelCaseUpperFirst %>RequestGetAllDTO from '../dtos/I<%= props.nameCamelCaseUpperFirst %>RequestGetAllDTO';

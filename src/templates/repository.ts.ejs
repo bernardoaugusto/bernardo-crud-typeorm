@@ -1,8 +1,7 @@
 import { Repository, getRepository } from 'typeorm';
-import { typeorm } from '@seidor-cloud-produtos/lib-seidor-common';
+import typeorm from '@seidor-cloud-produtos/typeorm';
 
 import <%= props.nameCamelCaseUpperFirst %> from '../entities/<%= props.nameCamelCaseUpperFirst %>';
-import I<%= props.nameCamelCaseUpperFirst %>DTO from '../../../dtos/I<%= props.nameCamelCaseUpperFirst %>DTO';
 import I<%= props.nameCamelCaseUpperFirst %>Repository from '../../../repositories/I<%= props.nameCamelCaseUpperFirst %>RepositoryDTO';
 
 export default class <%= props.nameCamelCaseUpperFirst %>Repository implements I<%= props.nameCamelCaseUpperFirst %>Repository {
@@ -12,7 +11,7 @@ export default class <%= props.nameCamelCaseUpperFirst %>Repository implements I
         this.ormRepository = getRepository(<%= props.nameCamelCaseUpperFirst %>);
     }
 
-    public async create(<%= props.nameCamelCase %>Data: I<%= props.nameCamelCaseUpperFirst %>DTO): Promise<<%= props.nameCamelCaseUpperFirst %>> {
+    public async create(<%= props.nameCamelCase %>Data: <%= props.nameCamelCaseUpperFirst %>): Promise<<%= props.nameCamelCaseUpperFirst %>> {
         const <%= props.nameCamelCase %> = this.ormRepository.create(<%= props.nameCamelCase %>Data);
 
         return this.ormRepository.save(<%= props.nameCamelCase %>);

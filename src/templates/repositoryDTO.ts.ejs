@@ -1,10 +1,9 @@
-import { typeorm } from '@seidor-cloud-produtos/lib-seidor-common';
+import typeorm from '@seidor-cloud-produtos/typeorm';
 
 import <%= props.nameCamelCaseUpperFirst %> from '../infra/typeorm/entities/<%= props.nameCamelCaseUpperFirst %>';
-import I<%= props.nameCamelCaseUpperFirst %>CreateDTO from '../dtos/I<%= props.nameCamelCaseUpperFirst %>CreateDTO';
 
 export default interface I<%= props.nameCamelCaseUpperFirst %>Repository {
-    create(<%= props.nameCamelCase %>Data: I<%= props.nameCamelCaseUpperFirst %>CreateDTO): Promise<<%= props.nameCamelCaseUpperFirst %>>;
+    create(<%= props.nameCamelCase %>Data: <%= props.nameCamelCaseUpperFirst %>): Promise<<%= props.nameCamelCaseUpperFirst %>>;
     update(updates: <%= props.nameCamelCaseUpperFirst %>): Promise<<%= props.nameCamelCaseUpperFirst %>>;
     findById(id: string): Promise<<%= props.nameCamelCaseUpperFirst %> | undefined>;
     getAllWithPagination(

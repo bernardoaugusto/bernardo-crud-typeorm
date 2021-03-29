@@ -12,6 +12,9 @@ export default class Create<%= props.nameCamelCaseUpperFirst %>Service {
     ) {}
 
     public async execute(<%= props.nameCamelCase %>Data: I<%= props.nameCamelCaseUpperFirst %>CreateDTO): Promise<<%= props.nameCamelCaseUpperFirst %>> {
-        return this.<%= props.nameCamelCase %>Repository.create(<%= props.nameCamelCase %>Data);
+        const <%= props.nameCamelCase %> = new <%= props.nameCamelCaseUpperFirst %>();
+        Object.assign(<%= props.nameCamelCase %>, <%= props.nameCamelCase %>Data);
+
+        return this.<%= props.nameCamelCase %>Repository.create(<%= props.nameCamelCase %>);
     }
 }
