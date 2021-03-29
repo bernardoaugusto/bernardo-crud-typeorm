@@ -1,5 +1,8 @@
 import { inject, injectable } from 'tsyringe';
-import typeorm from '@seidor-cloud-produtos/typeorm';
+import {
+    formatParamsToTypeOrmOptionsWithPaginate,
+    formatPaginateDataToResponse,
+} from '@seidor-cloud-produtos/typeorm';
 
 import <%= props.nameCamelCaseUpperFirst %> from '../infra/typeorm/entities/<%= props.nameCamelCaseUpperFirst %>';
 import I<%= props.nameCamelCaseUpperFirst %>RequestGetAllDTO from '../dtos/I<%= props.nameCamelCaseUpperFirst %>RequestGetAllDTO';
@@ -26,8 +29,9 @@ export default class GetAll<%= props.nameCamelCaseUpperFirst %>Service {
               totalPages: number;
           })
     > {
-        const options = typeorm.formatParamsToTypeOrmOptionsWithPaginate(
+        const options = formatParamsToTypeOrmOptionsWithPaginate(
             queryParams,
+            true
         );
 
         if (withPagination) {
@@ -35,7 +39,7 @@ export default class GetAll<%= props.nameCamelCaseUpperFirst %>Service {
                 options,
             );
 
-            return typeorm.formatPaginateDataToResponse(queryParams, array<%= props.nameCamelCaseUpperFirst %>);
+            return formatPaginateDataToResponse(queryParams, array<%= props.nameCamelCaseUpperFirst %>);
         }
 
         return this.<%= props.nameCamelCase %>Repository.getAllWithoutPagination(options);
