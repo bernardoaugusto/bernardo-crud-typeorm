@@ -1,6 +1,6 @@
 {
     "name": "bernardo-crud-typeorm",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "CRUD typeorm CLI",
     "bin": {
         "crud-typeorm": "bin/crud-typeorm"
