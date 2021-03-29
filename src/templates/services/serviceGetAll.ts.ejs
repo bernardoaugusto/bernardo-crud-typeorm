@@ -29,18 +29,23 @@ export default class GetAll<%= props.nameCamelCaseUpperFirst %>Service {
               totalPages: number;
           })
     > {
-        const options = formatParamsToTypeOrmOptionsWithPaginate(
-            queryParams,
-            true
-        );
-
         if (withPagination) {
+            const options = formatParamsToTypeOrmOptionsWithPaginate(
+                queryParams,
+                true,
+            );
+
             const array<%= props.nameCamelCaseUpperFirst %> = await this.<%= props.nameCamelCase %>Repository.getAllWithPagination(
                 options,
             );
 
             return formatPaginateDataToResponse(queryParams, array<%= props.nameCamelCaseUpperFirst %>);
         }
+
+        const options = formatParamsToTypeOrmOptionsWithoutPaginate(
+            queryParams,
+            true,
+        );
 
         return this.<%= props.nameCamelCase %>Repository.getAllWithoutPagination(options);
     }
